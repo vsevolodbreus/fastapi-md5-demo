@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MD5 File Hash Demo App</title>
+
+    <!-- Pico.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- Main -->
+    <main class="container">
+      <article class="grid">
+        <div>
+          <hgroup>
+            <h1>Demo App</h1>
+            <h2>A minimal app to calculate MD5 file hash</h2>
+          </hgroup>
+
+          <form action="/file">
+            <button type="submit" class="outline">Upload File</button>
+          </form>
+          <form action="/hash">
+            <button type="submit" class="outline">Look-up File Hash</button>
+          </form>
+        </div>
+        <div>
+          <div>
+            <h4>Instructions</h4>
+            <p>1. Select <b>Upload File</b> to upload file and receive an ID</p>
+            <p>2. Select <b>Look-up File Hash</b> to look up MD5 hash of processed file by ID</p>
+          </div>
+        </div>
+      </article>
+    </main>
+    <!-- ./ Main -->
+
+    <!-- Footer -->
+    <footer class="container-fluid">
+      <small>
+        Built with <a href="https://picocss.com" class="secondary">Pico</a> • By
+        Vsevolod Breus
+      </small>
+    </footer>
+    <!-- ./ Footer -->
+
+  </body>
+</html>

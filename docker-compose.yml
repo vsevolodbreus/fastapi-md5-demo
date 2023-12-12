@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+
+  app:
+    image: "app:latest"
+    build:
+      context: .
+      dockerfile: app.dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./files:/app/storage
+      - ./logs:/app/logs
+
+  worker:
+    image: "worker:latest"
+    build:
+      context: .
+      dockerfile: worker.dockerfile
+      args:
+       CELERY_QUEUE: ${CELERY_QUEUE}
+    env_file:
+      - .env
+    environment:
+      - CELERY_APP=worker1
+    depends_on:
+      - db
+      - queue
+    volumes:
+      - ./files:/app/storage
+      - ./logs:/app/logs
+
+#  another-worker:
+#    image: "worker:latest"
+#    build:
+#      context: .
+#      dockerfile: worker.dockerfile
+#      args:
+#       CELERY_QUEUE: ${CELERY_QUEUE}
+#    env_file:
+#      - .env
+#    environment:
+#      - CELERY_APP=worker2
+#    depends_on:
+#      - db
+#      - queue
+#    volumes:
+#      - ./files:/app/storage
+#      - ./logs:/app/logs
+
+  db:
+    image: "bitnami/postgresql:16"
+    environment:
+      - POSTGRESQL_USERNAME=demo
+      - POSTGRESQL_PASSWORD=demo
+      - POSTGRESQL_DATABASE=demo
+      - POSTGRESQL_POSTGRES_PASSWORD=postgres
+      - POSTGRESQL_INITSCRIPTS_USERNAME=postgres
+      - POSTGRESQL_INITSCRIPTS_PASSWORD=postgres
+    ports:
+    - "5432:5432"
+
+  queue:
+    image: "bitnami/rabbitmq:latest"
+    environment:
+      - RABBITMQ_USERNAME=demo
+      - RABBITMQ_PASSWORD=demo
+      - RABBITMQ_NODE_TYPE=queue-disc
+      - RABBITMQ_NODE_PORT_NUMBER=5672
+      - RABBITMQ_PLUGINS=rabbitmq_management
+      - RABBITMQ_MANAGEMENT_PORT_NUMBER=15672
+      - RABBITMQ_MANAGEMENT_ALLOW_WEB_ACCESS=true
+    ports:
+      - "15672:15672"
+      - "5672:5672"

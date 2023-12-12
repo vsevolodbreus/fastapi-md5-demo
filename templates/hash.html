@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MD5 File Hash Demo App</title>
+
+    <!-- Pico.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- Main -->
+    <main class="container">
+      <article class="grid">
+        <div>
+          <a href="/">
+            <hgroup>
+              <h1>Demo App</h1>
+              <h2>A minimal app to calculate MD5 file hash</h2>
+            </hgroup>
+          </a>
+          <form method="POST">
+              <input
+                type="text"
+                name="req_id"
+                placeholder="Hash ID"
+                aria-label="Hash ID"
+                pattern="[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}"
+                title="Enter File Hash UUID"
+                required>
+              <br>
+              <input type="submit" value="Submit" class="outline">
+          </form>
+        </div>
+        <div>
+          <div>
+            <table role="grid">
+              <thead>
+                <tr>
+                  <th scope="col">MD5 Hash</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if res %}
+                  <tr>
+                    <td>{{ res.md5_hash }}</td>
+                  </tr>
+                {% else %}
+                  <tr>
+                    <td><i>no id requested</i></td>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
+            {% if res %}
+              <form action="/file">
+                <button type="submit" class="outline">Try Another Hash?</button>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+    </main>
+    <!-- ./ Main -->
+
+    <!-- Footer -->
+    <footer class="container-fluid">
+      <small>
+        Built with <a href="https://picocss.com" class="secondary">Pico</a> • By
+        Vsevolod Breus
+      </small>
+    </footer>
+    <!-- ./ Footer -->
+  </body>
+</html>
