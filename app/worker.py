@@ -7,10 +7,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm.scoping import ScopedSession
 
-from app.config import settings
-from app.logger import logger
-from app.models import FileHash
-from app.utils import get_md5_hash
+from .config import settings
+from .logger import logger
+from .models import FileHash
+from .utils import get_md5_hash
 
 app = Celery(settings.CELERY_APP or __name__)
 app.conf.broker_url = settings.CELERY_BROKER_URL

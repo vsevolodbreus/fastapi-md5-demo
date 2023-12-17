@@ -1,0 +1,6 @@
+[project]
+name = "fastapi-md5-demo"
+version = "0.1"
+authors = [{name = "Vsevolod Breus", email = "vb@elyxium.dev"}]
+description = "A demo application that finds the md5 hash of a file"
+readme = "README.md"

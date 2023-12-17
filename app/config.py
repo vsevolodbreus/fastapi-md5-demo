@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     # Get config values from `.env` file
     model_config = SettingsConfigDict(env_file=".env")
 
-    PROJECT_NAME: str
+    PROJECT_NAME: Optional[str] = "FastAPI File MD5 Hash Demo"
 
     POSTGRES_HOST: str
     POSTGRES_PORT: Optional[int] = 5432

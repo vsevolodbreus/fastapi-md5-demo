@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   app:
-    image: "app:latest"
+    image: "fastapi-md5-demo-app:latest"
     build:
       context: .
       dockerfile: app.dockerfile
@@ -16,7 +16,7 @@ services:
       - ./logs:/app/logs
 
   worker:
-    image: "worker:latest"
+    image: "fastapi-md5-demo-worker:latest"
     build:
       context: .
       dockerfile: worker.dockerfile
@@ -34,7 +34,7 @@ services:
       - ./logs:/app/logs
 
 #  another-worker:
-#    image: "worker:latest"
+#    image: "fastapi-md5-demo-worker:latest"
 #    build:
 #      context: .
 #      dockerfile: worker.dockerfile

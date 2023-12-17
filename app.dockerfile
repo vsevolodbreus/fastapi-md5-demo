@@ -1,30 +1,27 @@
 FROM python:3.11-slim-buster
 
 # set working directory
-WORKDIR /app
+WORKDIR /demo
 
 # Copy only requirements file
-COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements.txt /demo/requirements.txt
 
 # Install requirements
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /demo/requirements.txt
 
 # Copy over html template & static files
-COPY ./templates /app/templates
-COPY ./static /app/static
+COPY ./templates /demo/templates
+COPY ./static /demo/static
 
 # Install the app
-COPY ./setup.py /app/setup.py
-RUN mkdir -p src/app
-COPY ./src/app /app/src/app
-RUN python -m pip install -e .
+COPY ./app /demo/app
 
 # Alembic stuff
-COPY ./alembic.ini /app/alembic.ini
-COPY ./alembic /app/alembic
+COPY ./alembic.ini /demo/alembic.ini
+COPY ./alembic /demo/alembic
 
 # Copy over env vars
-COPY ./.env /app/.env
+COPY ./.env /demo/.env
 
 # Launch the app
 CMD \

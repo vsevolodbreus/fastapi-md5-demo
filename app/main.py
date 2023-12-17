@@ -3,10 +3,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from app.config import settings
-from app.db import session_manager
-from app.routers import api as api_router
-from app.routers import main as main_router
+from .config import settings
+from .db import session_manager
+from .routers import api as api_router
+from .routers import main as main_router
 
 
 @asynccontextmanager

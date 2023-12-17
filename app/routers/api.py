@@ -1,5 +1,4 @@
 import uuid
-from importlib.metadata import distribution
 
 import aiofiles
 from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile
@@ -8,11 +7,11 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.config import settings
-from app.db import get_session
-from app.models import FileHash
-from app.schemas import FileHashSchema
-from app.worker import get_file_md5_hash
+from ..config import settings
+from ..db import get_session
+from ..models import FileHash
+from ..schemas import FileHashSchema
+from ..worker import get_file_md5_hash
 
 router = APIRouter(prefix="/api", tags=["api"])
 
@@ -20,8 +19,7 @@ router = APIRouter(prefix="/api", tags=["api"])
 @router.get("/", response_class=JSONResponse, status_code=http_status.HTTP_200_OK)
 async def index():
     return {
-        "service": "MD5 File Hash API",
-        "version": distribution("app").version,
+        "service": settings.PROJECT_NAME,
     }
 
 

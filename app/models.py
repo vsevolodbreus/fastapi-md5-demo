@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.orm.scoping import ScopedSession
 
-from app.db import Base
+from .db import Base
 
 
 class FileHash(Base):
